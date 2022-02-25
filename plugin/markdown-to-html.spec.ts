@@ -89,4 +89,26 @@ describe("markdownToHTML()", () => {
       "
     `);
   });
+
+  test("should syntax highlight the codeblock", () => {
+    const testMd = d`
+    # Hello
+
+    \`\`\`js
+    const a = 3;
+    \`\`\`
+
+    `;
+
+    expect(
+      markdownToHTML(testMd, {
+        syntaxHighlighting: true,
+      }).html
+    ).toMatchInlineSnapshot(`
+      "<h1>Hello</h1>
+      <pre><code class=\\"hljs language-js\\"><span class=\\"hljs-keyword\\">const</span> a = <span class=\\"hljs-number\\">3</span>;
+      </code></pre>
+      "
+    `);
+  });
 });
