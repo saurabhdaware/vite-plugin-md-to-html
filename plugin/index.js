@@ -22,11 +22,9 @@ export default html;
 export function vitePluginMdToHTML(pluginOptions) {
   return {
     name: "vite-plugin-md-to-html",
-    transform(mdSrc, id) {
-      // This is hack for dynamic global imports. We can't do dynamic global imports in current codebase
-      // resolve pages directory in default entry build
+    transform(source, id) {
       if (id.endsWith(".md")) {
-        const { html, attributes } = markdownToHTML(mdSrc, pluginOptions);
+        const { html, attributes } = markdownToHTML(source, pluginOptions);
         const jsSrc = createJSExports({ html, attributes });
         return { code: jsSrc };
       }
