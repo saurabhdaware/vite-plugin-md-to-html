@@ -1,12 +1,12 @@
 # vite-plugin-md-to-html
 
-Vite plugin to convert markdown to html.
+Vite plugin to convert markdown to html with front-matter extraction and build-time syntax highlighting.
 
 
-**TODO:**
+**Features**
 - [x] Markdown to HTML
 - [x] Front Matter Extraction
-- [ ] Syntax Highlighting for Codeblocks
+- [x] Build-Time Syntax Highlighting for Codeblocks
 
 ## Installation
 
@@ -16,6 +16,7 @@ npm install --save-dev vite-plugin-md-to-html
 
 ## Setup and Usage
 
+_`vite.config.js`_
 ```ts
 // vite.config.js
 import { defineConfig } from 'vite';
@@ -26,12 +27,64 @@ export default defineConfig({
 })
 ```
 
+_`test.md`_
+```md
+---
+title: Hello from front-matter
+---
+
+# Markdown File
+```
+
+_`main.js`_
 ```ts
+// main.js
 import testHTML, { attributes } from "./test.md";
 
-document.title = attributes.title;
-document.querySelector("#app").innerHTML = testHTML;
+document.title = attributes.title; // Hello from front-matter
+document.querySelector("#app").innerHTML = testHTML; // <h1>Markdown File</h1>
 ```
+
+## Options
+
+Options type
+```ts
+export type PluginOptions = {
+  markdownIt?: any; // markdown-it configurations
+  syntaxHighlight?: boolean; // true to enable syntax highlighting. default false.
+  highlightJs?: {
+    register?: Record<string, any>; // to register new language to syntax highlighting.
+  };
+};
+```
+
+### Build-Time Syntax Highlighting!!
+```ts
+import { defineConfig } from 'vite';
+import { vitePluginMdToHTML } from 'vite-plugin-md-to-html';
+
+export default defineConfig({
+  plugins: [
+    vitePluginMdToHTML({
+      syntaxHighlight: true
+    })
+  ]
+})
+```
+
+This will not include the CSS of syntax highlighting. You can-
+
+Either import css from `highlight.js` npm package
+```sh
+import 'highlight.js/styles/github.css';
+```
+
+Or use it from CDN
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+```
+
+Check out https://highlightjs.org/usage/ for more details.
 
 ## Type Declaration
 

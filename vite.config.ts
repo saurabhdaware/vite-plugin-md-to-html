@@ -1,6 +1,10 @@
-import { defineConfig } from 'vite';
-import { vitePluginMdToHTML } from './plugin';
+import { defineConfig } from "vite";
+import { vitePluginMdToHTML } from "./plugin";
 
 export default defineConfig({
-  plugins: [vitePluginMdToHTML()]
-})
+  plugins: [
+    vitePluginMdToHTML({
+      syntaxHighlight: true,
+    }),
+  ],
+});

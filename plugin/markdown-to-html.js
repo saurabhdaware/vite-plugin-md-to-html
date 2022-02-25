@@ -1,5 +1,6 @@
 import markdownIt from "markdown-it";
 import fm from "front-matter";
+import markdownItHljs from "markdown-it-highlightjs";
 
 /**
  *
@@ -8,20 +9,45 @@ import fm from "front-matter";
 
 let md;
 
+/** @type {PluginOptions} */
+const defaultPluginOptions = {
+  syntaxHighlight: false,
+  markdownIt: {
+    html: true,
+    linkify: true,
+  },
+  highlightJs: {},
+};
+
 /**
  *
  * @param {string} mdSource
- * @param {PluginOptions} pluginOptions
+ * @param {PluginOptions} userPluginOptions
  * @returns {{html: string, attributes: any}}
  */
-export const markdownToHTML = (mdSource, pluginOptions = {}) => {
+export const markdownToHTML = (mdSource, userPluginOptions = {}) => {
   // In test environment, we're changing configs on every call
+  /** @type {PluginOptions} */
+  const pluginOptions = {
+    ...defaultPluginOptions,
+    ...userPluginOptions,
+    markdownIt: {
+      ...defaultPluginOptions.markdownIt,
+      ...userPluginOptions.markdownIt,
+    },
+    highlightJs: {
+      ...defaultPluginOptions.highlightJs,
+      ...userPluginOptions.highlightJs,
+    },
+  };
   if (!md || process.env.NODE_ENV === "test") {
-    md = markdownIt({
-      html: true,
-      linkify: true,
-      ...pluginOptions.markdownIt,
-    });
+    md = markdownIt(pluginOptions.markdownIt);
+
+    if (pluginOptions.syntaxHighlight) {
+      md.use(markdownItHljs, {
+        register: pluginOptions.highlightJs.register || {},
+      });
+    }
   }
 
   const fmObject = fm(mdSource);
