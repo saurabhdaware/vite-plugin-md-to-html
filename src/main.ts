@@ -1,5 +1,5 @@
 import testMd, { attributes } from "./test.md";
-import "./calvera-theme.css";
+import "highlightjs-calvera-dark/theme.css";
 
 document.title = attributes.title;
 document.querySelector("#app").innerHTML = testMd;
