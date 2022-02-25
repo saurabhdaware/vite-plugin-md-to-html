@@ -1,0 +1,24 @@
+{
+  "name": "vite-plugin-md-to-html",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./plugin/index.js",
+  "types": "./plugin/types.d.ts",
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dedent": "^0.7.0",
+    "vite": "^2.8.4",
+    "vitest": "^0.5.5"
+  },
+  "dependencies": {
+    "front-matter": "^4.0.2",
+    "markdown-it": "^12.3.2"
+  }
+}
