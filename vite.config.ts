@@ -4,7 +4,7 @@ import { vitePluginMdToHTML } from "./plugin";
 export default defineConfig({
   plugins: [
     vitePluginMdToHTML({
-      syntaxHighlight: true,
+      syntaxHighlighting: true,
     }),
   ],
 });

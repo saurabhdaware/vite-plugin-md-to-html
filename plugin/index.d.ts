@@ -1,6 +1,6 @@
 export type PluginOptions = {
   markdownIt?: any;
-  syntaxHighlight?: boolean;
+  syntaxHighlighting?: boolean;
   highlightJs?: {
     register?: Record<string, any>;
   };

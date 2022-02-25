@@ -11,7 +11,7 @@ let md;
 
 /** @type {PluginOptions} */
 const defaultPluginOptions = {
-  syntaxHighlight: false,
+  syntaxHighlighting: false,
   markdownIt: {
     html: true,
     linkify: true,
@@ -43,7 +43,7 @@ export const markdownToHTML = (mdSource, userPluginOptions = {}) => {
   if (!md || process.env.NODE_ENV === "test") {
     md = markdownIt(pluginOptions.markdownIt);
 
-    if (pluginOptions.syntaxHighlight) {
+    if (pluginOptions.syntaxHighlighting) {
       md.use(markdownItHljs, {
         register: pluginOptions.highlightJs.register || {},
       });

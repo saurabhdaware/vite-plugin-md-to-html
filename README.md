@@ -51,7 +51,7 @@ Options type
 ```ts
 export type PluginOptions = {
   markdownIt?: any; // markdown-it configurations
-  syntaxHighlight?: boolean; // true to enable syntax highlighting. default false.
+  syntaxHighlighting?: boolean; // true to enable syntax highlighting. default false.
   highlightJs?: {
     register?: Record<string, any>; // to register new language to syntax highlighting.
   };
@@ -66,7 +66,7 @@ import { vitePluginMdToHTML } from 'vite-plugin-md-to-html';
 export default defineConfig({
   plugins: [
     vitePluginMdToHTML({
-      syntaxHighlight: true
+      syntaxHighlighting: true
     })
   ]
 })
