@@ -71,15 +71,21 @@ describe("markdownToHTML()", () => {
 
     `;
 
+    expect(markdownToHTML(testMd).html).toMatchInlineSnapshot(`
+      "<h1>Hello</h1>
+      <p><a href=\\"https://abelljs.org/\\">https://abelljs.org/</a></p>
+      "
+    `);
+
     expect(
       markdownToHTML(testMd, {
         markdownIt: {
-          linkify: true,
+          linkify: false,
         },
       }).html
     ).toMatchInlineSnapshot(`
       "<h1>Hello</h1>
-      <p><a href=\\"https://abelljs.org/\\">https://abelljs.org/</a></p>
+      <p>https://abelljs.org/</p>
       "
     `);
   });

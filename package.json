@@ -7,7 +7,9 @@
   "scripts": {
     "test": "vitest",
     "test:run": "vitest run",
-    "dev": "vite"
+    "dev": "vite",
+    "build:example": "vite build",
+    "prepublishOnly": "npm run build:example && npm run test:run"
   },
   "keywords": [],
   "author": "",

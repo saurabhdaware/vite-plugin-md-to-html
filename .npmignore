@@ -3,3 +3,4 @@ src
 index.html
 vite.config.ts
 .vscode
+dist/

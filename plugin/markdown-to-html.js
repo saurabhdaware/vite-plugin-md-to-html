@@ -19,6 +19,7 @@ export const markdownToHTML = (mdSource, pluginOptions = {}) => {
   if (!md || process.env.NODE_ENV === "test") {
     md = markdownIt({
       html: true,
+      linkify: true,
       ...pluginOptions.markdownIt,
     });
   }
