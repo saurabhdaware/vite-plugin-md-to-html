@@ -8,6 +8,8 @@ Vite plugin to convert markdown to html with front-matter extraction and build-t
 - [x] Front Matter Extraction
 - [x] Build-Time Syntax Highlighting for Codeblocks
 
+Try it out on [StackBlitz](https://stackblitz.com/edit/vitejs-vite-urnt3m?file=src%2Fmain.js&terminal=dev)
+
 ## Installation
 
 ```sh
