@@ -1,6 +1,6 @@
-import markdownIt from "markdown-it";
-import fm from "front-matter";
-import markdownItHljs from "markdown-it-highlightjs";
+const markdownIt = require("markdown-it");
+const fm = require("front-matter");
+const markdownItHljs = require("markdown-it-highlightjs");
 
 /**
  *
@@ -25,7 +25,7 @@ const defaultPluginOptions = {
  * @param {PluginOptions} userPluginOptions
  * @returns {{html: string, attributes: any}}
  */
-export const markdownToHTML = (mdSource, userPluginOptions = {}) => {
+const markdownToHTML = (mdSource, userPluginOptions = {}) => {
   // In test environment, we're changing configs on every call
   /** @type {PluginOptions} */
   const pluginOptions = {
@@ -56,4 +56,8 @@ export const markdownToHTML = (mdSource, userPluginOptions = {}) => {
     html: md.render(fmObject.body),
     attributes: fmObject.attributes,
   };
+};
+
+module.exports = {
+  markdownToHTML,
 };

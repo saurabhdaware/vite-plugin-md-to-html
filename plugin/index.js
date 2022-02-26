@@ -3,7 +3,7 @@
  * @typedef {import('./index').PluginOptions} PluginOptions
  */
 
-import { markdownToHTML } from "./markdown-to-html";
+const { markdownToHTML } = require("./markdown-to-html");
 
 const createJSExports = ({ html, attributes }) => {
   const jsSrc = `
@@ -19,7 +19,7 @@ export default html;
  *
  * @param {PluginOptions} pluginOptions
  */
-export function vitePluginMdToHTML(pluginOptions) {
+function vitePluginMdToHTML(pluginOptions) {
   return {
     name: "vite-plugin-md-to-html",
     transform(source, id) {
@@ -31,3 +31,7 @@ export function vitePluginMdToHTML(pluginOptions) {
     },
   };
 }
+
+module.exports = {
+  vitePluginMdToHTML,
+};
