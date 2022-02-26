@@ -1,9 +1,13 @@
 {
   "name": "vite-plugin-md-to-html",
-  "version": "0.0.4",
-  "description": "",
+  "version": "0.0.5",
+  "description": "vite plugin to turn markdown into html",
   "main": "./plugin/index.js",
-  "types": "./plugin/types.d.ts",
+  "types": "./plugin/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabhdaware/vite-plugin-md-to-html.git"
+  },
   "scripts": {
     "test": "vitest",
     "test:run": "vitest run",
