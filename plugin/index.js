@@ -8,7 +8,7 @@ const { markdownToHTML } = require("./markdown-to-html");
 const createJSExports = ({ html, attributes }) => {
   const jsSrc = `
 export const attributes = ${JSON.stringify(attributes)};
-export const html = \`${html}\`;
+export const html = ${JSON.stringify(html)};
 export default html;
 `;
 
