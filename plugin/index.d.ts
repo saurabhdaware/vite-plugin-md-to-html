@@ -7,3 +7,4 @@ export type PluginOptions = {
 };
 
 export declare function vitePluginMdToHTML(pluginOptions?: PluginOptions): any;
+export default function vitePluginMdToHTML(pluginOptions?: PluginOptions): any;

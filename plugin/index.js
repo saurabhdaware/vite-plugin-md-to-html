@@ -19,7 +19,7 @@ export default html;
  *
  * @param {PluginOptions} pluginOptions
  */
-function vitePluginMdToHTML(pluginOptions) {
+const vitePluginMdToHTML = (pluginOptions) => {
   return {
     name: "vite-plugin-md-to-html",
     transform(source, id) {
@@ -30,8 +30,7 @@ function vitePluginMdToHTML(pluginOptions) {
       }
     },
   };
-}
-
-module.exports = {
-  vitePluginMdToHTML,
 };
+
+vitePluginMdToHTML.vitePluginMdToHTML = vitePluginMdToHTML;
+module.exports = vitePluginMdToHTML;
