@@ -2,7 +2,7 @@
 
 Vite plugin to convert markdown to html with front-matter extraction, build-time syntax highlighting, and relative image resolutions.
 
-Try it out on [StackBlitz](https://stackblitz.com/edit/vitejs-vite-urnt3m?file=src%2Fmain.js&terminal=dev)
+Try it out on [StackBlitz](https://stackblitz.com/edit/vite-plugin-md-to-html?file=src%2Fmain.js&terminal=dev)
 
 ---
 **Table of Content**
