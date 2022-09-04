@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [
     vitePluginMdToHTML({
       syntaxHighlighting: true,
+      resolveImageLinks: true,
     }),
   ],
 });
