@@ -104,4 +104,34 @@ describe("plugin.transform()", () => {
         "
       `);
   });
+
+  test("should not add imports when image has absolute url", () => {
+    const mdSource = d`
+    ## Hello
+
+    ![example](https://hello.com/example.png)
+    ![example](./example.png)
+
+    <img alt="hello" src="https://example.com/hello.jpeg" />
+    `;
+
+    const mdPath = "./hello.md";
+
+    const pluginWithResolves = vitePluginMdToHTML({
+      resolveImageLinks: true,
+    });
+
+    expect(pluginWithResolves.transform(mdSource, mdPath).code)
+      .toMatchInlineSnapshot(`
+        "import mdLink0 from \\"./example.png?url\\";
+        
+        export const attributes = {};
+        export const html = \`<h2>Hello</h2>
+        <p><img src=\\"https://hello.com/example.png\\" alt=\\"example\\">
+        <img src=\\"\${mdLink0}\\" alt=\\"example\\"></p>
+        <img alt=\\"hello\\" src=\\"https://example.com/hello.jpeg\\" />\`;
+        export default html;
+        "
+      `);
+  });
 });

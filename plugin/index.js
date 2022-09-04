@@ -17,10 +17,16 @@ const getAssetImports = (html) => {
   let importDeclarations = "";
   let variableNameCount = 0;
   const htmlWithImportLinks = html.replace(HTML_SRC_PICK_REGEX, (...picks) => {
+    const restAttributes = picks[1];
+    const imgUrl = picks[2];
+    if (imgUrl.startsWith("http")) {
+      return picks[0];
+    }
+
     const variableName = `mdLink${variableNameCount}`;
     variableNameCount++;
-    importDeclarations += `import ${variableName} from "${picks[2]}?url";\n`;
-    return `<img${picks[1]}src="\${${variableName}}"`;
+    importDeclarations += `import ${variableName} from "${imgUrl}?url";\n`;
+    return `<img${restAttributes}src="\${${variableName}}"`;
   });
 
   return { htmlWithImportLinks, importDeclarations };
