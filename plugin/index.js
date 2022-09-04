@@ -18,6 +18,7 @@ const getAssetImports = (html) => {
   let variableNameCount = 0;
   const htmlWithImportLinks = html.replace(HTML_SRC_PICK_REGEX, (...picks) => {
     const variableName = `mdLink${variableNameCount}`;
+    variableNameCount++;
     importDeclarations += `import ${variableName} from "${picks[2]}?url";\n`;
     return `<img${picks[1]}src="\${${variableName}}"`;
   });
@@ -50,7 +51,7 @@ const vitePluginMdToHTML = (pluginOptions) => {
         const { html, attributes } = markdownToHTML(source, pluginOptions);
         let htmlWithImportLinks = html;
         let importDeclarations = "";
-        if (pluginOptions.resolveImgImports) {
+        if (pluginOptions?.resolveImageLinks) {
           ({ htmlWithImportLinks, importDeclarations } = getAssetImports(html));
         }
 
