@@ -2,22 +2,31 @@
 
 Vite plugin to convert markdown to html with front-matter extraction, build-time syntax highlighting, and relative image resolutions.
 
-
-**Features**
-- Markdown to HTML
-- Front Matter Extraction
-- An option to resolve relative image links in markdown
-- [Build-Time Syntax Highlighting for Codeblocks](#build-time-syntax-highlighting)
-
 Try it out on [StackBlitz](https://stackblitz.com/edit/vitejs-vite-urnt3m?file=src%2Fmain.js&terminal=dev)
 
-## Installation
+---
+**Table of Content**
+- [Installation](#🐥-installation)
+- [Setup and Usage](#👷🏻-setup-and-usage)
+- [Options](#⚙️-options)
+- [Type Declarations](#💙-type-declaration)
+- [Features](#✨-features)
+  - [Image Path Resolutions](#🏞-image-path-resolutions)
+  - [Build-Time Syntax Highlighting](#🖊-build-time-syntax-highlighting)
+- [Why New Plugin?](#🤔-why-new-plugin)
+---
+
+## 🐥 Installation
 
 ```sh
 npm install --save-dev vite-plugin-md-to-html
+
+# OR
+
+yarn add vite-plugin-md-to-html -D
 ```
 
-## Setup and Usage
+## 👷🏻 Setup and Usage
 
 _`vite.config.js`_
 ```ts
@@ -48,7 +57,7 @@ document.title = attributes.title; // Hello from front-matter
 document.querySelector("#app").innerHTML = testHTML; // <h1>Markdown File</h1>
 ```
 
-## Options
+## ⚙️ Options
 
 Options type
 ```ts
@@ -63,7 +72,7 @@ export type PluginOptions = {
 ```
 
 
-## Type Declaration
+## 💙 Type Declaration
 
 Add this to your `global.d.ts` to remove TS errors in markdown imports.
 
@@ -78,7 +87,7 @@ declare module "*.md" {
 
 ## ✨ Features
 
-### 🏞 Image Path Resolutions
+### 🏞  Image Path Resolutions
 
 The relative paths in markdown will not work by default.
 
@@ -133,13 +142,13 @@ Or use it from CDN
 
 Check out https://highlightjs.org/usage/ for more details.
 
-## Why New Plugin?
+## 🤔 Why New Plugin?
 
 There are other plugins that you can use if you want to convert markdown to framework components.
 - [vite-plugin-md](https://www.npmjs.com/package/vite-plugin-md) for markdown to Vue component
 - [vite-plugin-svelte-md](https://www.npmjs.com/package/vite-plugin-svelte-md) for markdown to Svelte component
 - [vite-plugin-markdown](https://www.npmjs.com/package/vite-plugin-markdown) for markdown to HTML, Vue, React, TOC\
-  This one in particular also supports turning markdown into HTML. However I was looking for a plugin where I can get markdown-to-html working without specifying any configurations and something that comes with default configs.
+  This one in particular also supports turning markdown into HTML. However I was looking for a plugin where I can get markdown-to-html working without specifying any configurations and something that comes with default configs and is built for HTML output specifically.
 
 - [vite-plugin-md2html](https://www.npmjs.com/package/vite-plugin-md2html) for markdown to HTML\
   I found about this after building `vite-plugin-md-to-html`. It also supports markdown to HTML. Although, I countinue to maintain `vite-plugin-md-to-html` for features like syntax highlighting based on just boolean, or path resolutions in markdown.
