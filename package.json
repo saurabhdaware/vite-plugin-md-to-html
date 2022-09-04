@@ -28,7 +28,7 @@
   "devDependencies": {
     "dedent": "^0.7.0",
     "highlightjs-calvera-dark": "^0.0.1",
-    "vite": "^2.8.4",
+    "vite": "^3.0.9",
     "vitest": "^0.5.5"
   },
   "dependencies": {
