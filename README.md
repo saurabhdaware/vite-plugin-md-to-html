@@ -6,14 +6,14 @@ Try it out on [StackBlitz](https://stackblitz.com/edit/vitejs-vite-urnt3m?file=s
 
 ---
 **Table of Content**
-- [Installation](#🐥-installation)
-- [Setup and Usage](#👷🏻-setup-and-usage)
-- [Options](#⚙️-options)
-- [Type Declarations](#💙-type-declaration)
-- [Features](#✨-features)
-  - [Image Path Resolutions](#🏞-image-path-resolutions)
-  - [Build-Time Syntax Highlighting](#🖊-build-time-syntax-highlighting)
-- [Why New Plugin?](#🤔-why-new-plugin)
+- [Installation](#-installation)
+- [Setup and Usage](#-setup-and-usage)
+- [Options](#%EF%B8%8F-options)
+- [Type Declarations](#-type-declaration)
+- [Features](#-features)
+  - [Image Path Resolutions](#--image-path-resolutions)
+  - [Build-Time Syntax Highlighting](#-build-time-syntax-highlighting)
+- [Why New Plugin?](#-why-new-plugin)
 ---
 
 ## 🐥 Installation
