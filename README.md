@@ -138,10 +138,10 @@ Check out https://highlightjs.org/usage/ for more details.
 There are other plugins that you can use if you want to convert markdown to framework components.
 - [vite-plugin-md](https://www.npmjs.com/package/vite-plugin-md) for markdown to Vue component
 - [vite-plugin-svelte-md](https://www.npmjs.com/package/vite-plugin-svelte-md) for markdown to Svelte component
-- [vite-plugin-markdown](https://www.npmjs.com/package/vite-plugin-markdown) for markdown to HTML, Vue, React, TOC
+- [vite-plugin-markdown](https://www.npmjs.com/package/vite-plugin-markdown) for markdown to HTML, Vue, React, TOC\
   This one in particular also supports turning markdown into HTML. However I was looking for a plugin where I can get markdown-to-html working without specifying any configurations and something that comes with default configs.
 
-- [vite-plugin-md2html](https://www.npmjs.com/package/vite-plugin-md2html) for markdown to HTML
+- [vite-plugin-md2html](https://www.npmjs.com/package/vite-plugin-md2html) for markdown to HTML\
   I found about this after building `vite-plugin-md-to-html`. It also supports markdown to HTML. Although, I countinue to maintain `vite-plugin-md-to-html` for features like syntax highlighting based on just boolean, or path resolutions in markdown.
 
 
