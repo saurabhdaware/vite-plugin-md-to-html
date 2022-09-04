@@ -1,4 +1,4 @@
-plugin/markdown-to-html.spec.ts
+plugin/*.spec.ts
 src
 index.html
 vite.config.ts
