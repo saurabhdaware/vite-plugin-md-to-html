@@ -12,6 +12,7 @@ let md;
 /** @type {PluginOptions} */
 const defaultPluginOptions = {
   syntaxHighlighting: false,
+  resolveImgImports: false,
   markdownIt: {
     html: true,
     linkify: true,

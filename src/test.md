@@ -22,3 +22,5 @@ const x = (hi) => {}
 ```html
 <div></div>
 ```
+
+![Example Image](./example.png)
