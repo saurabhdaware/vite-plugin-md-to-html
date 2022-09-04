@@ -78,11 +78,7 @@ Add this to your `global.d.ts` to remove TS errors in markdown imports.
 
 ```ts
 // global.d.ts
-declare module "*.md" {
-  export const html: string;
-  export const attributes: Record<string, any>;
-  export default html;
-}
+/// <reference types="vite-plugin-md-to-html/types" />
 ```
 
 ## ✨ Features
