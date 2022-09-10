@@ -32,19 +32,20 @@ const getAssetImports = (html) => {
   return { htmlWithImportLinks, importDeclarations };
 };
 
-const createJSExports = ({ html, attributes, importDeclarations }) => {
-  const clientSideImageImportScript = `<script type="module">${importDeclarations.replace(
-    /import.*?from/g,
-    "import" // Turning `import xyz from './file.svg';` statements to `import './file.svg'` statements
-  )}</script>`;
+const createJSExports = ({
+  html,
+  attributes,
+  importDeclarations,
+  clientSideImageImportScript,
+}) => {
   const htmlExport = importDeclarations
     ? `export const html = \`${clientSideImageImportScript}${html}\`;`
     : `export const html = ${JSON.stringify(html)}`;
   const jsSrc = `${importDeclarations}
-export const attributes = ${JSON.stringify(attributes)};
-${htmlExport}
-export default html;
-`;
+ export const attributes = ${JSON.stringify(attributes)};
+ ${htmlExport}
+ export default html;
+ `;
 
   return jsSrc;
 };
@@ -54,21 +55,35 @@ export default html;
  * @param {PluginOptions} pluginOptions
  */
 const vitePluginMdToHTML = (pluginOptions) => {
+  /** @type {boolean} */
+  let isSSRBuild = false;
   return {
     name: "vite-plugin-md-to-html",
+    configResolved(resolvedConfig) {
+      isSSRBuild = !!resolvedConfig.build.ssr;
+    },
     transform(source, id) {
       if (id.endsWith(".md")) {
         const { html, attributes } = markdownToHTML(source, pluginOptions);
         let htmlWithImportLinks = html;
         let importDeclarations = "";
+        let clientSideImageImportScript = "";
         if (pluginOptions?.resolveImageLinks) {
           ({ htmlWithImportLinks, importDeclarations } = getAssetImports(html));
+        }
+
+        if (isSSRBuild) {
+          clientSideImageImportScript = `<script type="module">${importDeclarations.replace(
+            /import.*?from/g,
+            "import" // Turning `import xyz from './file.svg';` statements to `import './file.svg'` statements
+          )}</script>`;
         }
 
         const jsSrc = createJSExports({
           html: htmlWithImportLinks,
           attributes,
           importDeclarations,
+          clientSideImageImportScript,
         });
         return { code: jsSrc };
       }
