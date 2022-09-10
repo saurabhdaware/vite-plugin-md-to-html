@@ -80,16 +80,18 @@ describe("plugin.transform()", () => {
 
     expect(pluginWithResolves.transform(mdSource, mdPath).code)
       .toMatchInlineSnapshot(`
-      "import mdLink0 from \\"./example.png?url\\";
-      import mdLink1 from \\"./hello.jpeg?url\\";
-      
-      export const attributes = {};
-      export const html = \`<h2>Hello</h2>
-      <p><img src=\\"\${mdLink0}\\" alt=\\"example\\"></p>
-      <img alt=\\"hello\\" src=\\"\${mdLink1}\\" />\`;
-      export default html;
-      "
-    `);
+        "import mdLink0 from \\"./example.png?url\\";
+        import mdLink1 from \\"./hello.jpeg?url\\";
+        
+        export const attributes = {};
+        export const html = \`<script type=\\"module\\">import \\"./example.png?url\\";
+        import \\"./hello.jpeg?url\\";
+        </script><h2>Hello</h2>
+        <p><img src=\\"\${mdLink0}\\" alt=\\"example\\"></p>
+        <img alt=\\"hello\\" src=\\"\${mdLink1}\\" />\`;
+        export default html;
+        "
+      `);
 
     const pluginWithoutResolves = vitePluginMdToHTML({
       resolveImageLinks: false,
@@ -126,7 +128,8 @@ describe("plugin.transform()", () => {
         "import mdLink0 from \\"./example.png?url\\";
         
         export const attributes = {};
-        export const html = \`<h2>Hello</h2>
+        export const html = \`<script type=\\"module\\">import \\"./example.png?url\\";
+        </script><h2>Hello</h2>
         <p><img src=\\"https://hello.com/example.png\\" alt=\\"example\\">
         <img src=\\"\${mdLink0}\\" alt=\\"example\\"></p>
         <img alt=\\"hello\\" src=\\"https://example.com/hello.jpeg\\" />\`;

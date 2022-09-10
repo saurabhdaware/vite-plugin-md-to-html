@@ -33,8 +33,12 @@ const getAssetImports = (html) => {
 };
 
 const createJSExports = ({ html, attributes, importDeclarations }) => {
+  const clientSideImageImportScript = `<script type="module">${importDeclarations.replace(
+    /import.*?from/g,
+    "import" // Turning `import xyz from './file.svg';` statements to `import './file.svg'` statements
+  )}</script>`;
   const htmlExport = importDeclarations
-    ? `export const html = \`${html}\`;`
+    ? `export const html = \`${clientSideImageImportScript}${html}\`;`
     : `export const html = ${JSON.stringify(html)}`;
   const jsSrc = `${importDeclarations}
 export const attributes = ${JSON.stringify(attributes)};
