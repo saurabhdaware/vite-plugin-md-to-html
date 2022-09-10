@@ -42,10 +42,10 @@ const createJSExports = ({
     ? `export const html = \`${clientSideImageImportScript}${html}\`;`
     : `export const html = ${JSON.stringify(html)}`;
   const jsSrc = `${importDeclarations}
- export const attributes = ${JSON.stringify(attributes)};
- ${htmlExport}
- export default html;
- `;
+export const attributes = ${JSON.stringify(attributes)};
+${htmlExport}
+export default html;
+`;
 
   return jsSrc;
 };

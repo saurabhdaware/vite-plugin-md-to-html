@@ -78,6 +78,7 @@ describe("plugin.transform()", () => {
       resolveImageLinks: true,
     });
 
+    pluginWithResolves.configResolved({ build: { ssr: true } });
     expect(pluginWithResolves.transform(mdSource, mdPath).code)
       .toMatchInlineSnapshot(`
         "import mdLink0 from \\"./example.png?url\\";
@@ -123,6 +124,7 @@ describe("plugin.transform()", () => {
       resolveImageLinks: true,
     });
 
+    pluginWithResolves.configResolved({ build: { ssr: true } });
     expect(pluginWithResolves.transform(mdSource, mdPath).code)
       .toMatchInlineSnapshot(`
         "import mdLink0 from \\"./example.png?url\\";
@@ -136,5 +138,32 @@ describe("plugin.transform()", () => {
         export default html;
         "
       `);
+  });
+
+  test("should not add script import on client-side", () => {
+    const mdSource = d`
+    ## Hello
+    ![example](./example.png)
+    `;
+
+    const mdPath = "./hello.md";
+
+    const pluginWithResolves = vitePluginMdToHTML({
+      resolveImageLinks: true,
+    });
+
+    pluginWithResolves.configResolved({ build: { ssr: false } });
+    expect(
+      pluginWithResolves.transform(mdSource, mdPath).code
+    ).toMatchInlineSnapshot(`
+      "import mdLink0 from \\"./example.png?url\\";
+      
+      export const attributes = {};
+      export const html = \`<h2>Hello</h2>
+      <p><img src=\\"\${mdLink0}\\" alt=\\"example\\"></p>
+      \`;
+      export default html;
+      "
+    `);
   });
 });
