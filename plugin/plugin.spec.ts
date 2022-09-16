@@ -10,6 +10,7 @@ import { default as d } from "dedent";
  */
 const removeAbsLinks = (codeString: string): string => {
   const absolutePathRegExp = new RegExp(path.resolve("."), "g");
+  console.log(absolutePathRegExp);
   return codeString.replace(absolutePathRegExp, ".");
 };
 
@@ -74,7 +75,7 @@ describe("plugin.transform()", () => {
     `);
   });
 
-  test("should add imports based on resolveImageLinks option", () => {
+  test.only("should add imports based on resolveImageLinks option", () => {
     const mdSource = d`
     ## Hello
 
@@ -89,6 +90,9 @@ describe("plugin.transform()", () => {
       resolveImageLinks: true,
     });
 
+    console.log("DEBUG LOGS============");
+    console.log(path.resolve("."));
+    console.log("DEBUG LOGS END============");
     pluginWithResolves.configResolved({ build: { ssr: true } });
     expect(removeAbsLinks(pluginWithResolves.transform(mdSource, mdPath).code))
       .toMatchInlineSnapshot(`
