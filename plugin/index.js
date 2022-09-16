@@ -3,6 +3,7 @@
  * @typedef {import('./index').PluginOptions} PluginOptions
  */
 
+const path = require("path");
 const { markdownToHTML } = require("./markdown-to-html");
 
 const HTML_SRC_PICK_REGEX = /<img(.*?)src="(.*?)"/g;
@@ -13,19 +14,22 @@ const HTML_SRC_PICK_REGEX = /<img(.*?)src="(.*?)"/g;
  * - Changes the `<img src="./example.png" />` to `<img src="${variableName}" />`
  * - Returns the import declarations for variableName
  */
-const getAssetImports = (html) => {
+const getAssetImports = (html, markdownFilePath) => {
   let importDeclarations = "";
   let variableNameCount = 0;
   const htmlWithImportLinks = html.replace(HTML_SRC_PICK_REGEX, (...picks) => {
     const restAttributes = picks[1];
     const imgUrl = picks[2];
+
+    // If absolute web URL, return the same matched content
     if (imgUrl.startsWith("http")) {
       return picks[0];
     }
 
+    const fullImgURL = path.resolve(path.dirname(markdownFilePath), imgUrl);
     const variableName = `mdLink${variableNameCount}`;
     variableNameCount++;
-    importDeclarations += `import ${variableName} from "${imgUrl}?url";\n`;
+    importDeclarations += `import ${variableName} from "${fullImgURL}?url";\n`;
     return `<img${restAttributes}src="\${${variableName}}"`;
   });
 
@@ -69,7 +73,10 @@ const vitePluginMdToHTML = (pluginOptions) => {
         let importDeclarations = "";
         let clientSideImageImportScript = "";
         if (pluginOptions?.resolveImageLinks) {
-          ({ htmlWithImportLinks, importDeclarations } = getAssetImports(html));
+          ({ htmlWithImportLinks, importDeclarations } = getAssetImports(
+            html,
+            id
+          ));
         }
 
         if (isSSRBuild) {
