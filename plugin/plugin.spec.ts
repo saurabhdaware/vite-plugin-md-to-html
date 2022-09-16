@@ -9,7 +9,10 @@ import { default as d } from "dedent";
  * We don't want to add `/Users/saurabh.daware/` kind of URL in snapshot since it might be different in everyone's machine
  */
 const removeAbsLinks = (codeString: string): string => {
-  const absolutePathRegExp = new RegExp(path.resolve("."), "g");
+  const absolutePathRegExp = new RegExp(
+    path.resolve(".").replace(/\\/g, "\\\\"),
+    "g"
+  );
   console.log(absolutePathRegExp);
   return codeString.replace(absolutePathRegExp, ".");
 };
