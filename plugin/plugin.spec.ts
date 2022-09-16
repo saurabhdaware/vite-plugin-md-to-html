@@ -9,8 +9,8 @@ import { default as d } from "dedent";
  * We don't want to add `/Users/saurabh.daware/` kind of URL in snapshot since it might be different in everyone's machine
  */
 const removeAbsLinks = (codeString: string): string => {
-  // @ts-ignore: too lazy to add tsconfig.json to this project.
-  return codeString.replaceAll(path.resolve("."), ".");
+  const absolutePathRegExp = new RegExp(path.resolve("."), "g");
+  return codeString.replace(absolutePathRegExp, ".");
 };
 
 describe("plugin.transform()", () => {
