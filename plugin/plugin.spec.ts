@@ -13,8 +13,10 @@ const removeAbsLinks = (codeString: string): string => {
     path.resolve(".").replace(/\\/g, "\\\\"),
     "g"
   );
-  console.log(absolutePathRegExp);
-  return codeString.replace(absolutePathRegExp, ".");
+  const pathSepRegExp = /\\\\/g;
+  return codeString
+    .replace(absolutePathRegExp, ".")
+    .replace(pathSepRegExp, "/");
 };
 
 describe("plugin.transform()", () => {
