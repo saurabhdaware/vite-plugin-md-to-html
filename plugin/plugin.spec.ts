@@ -10,10 +10,12 @@ import { default as d } from "dedent";
  */
 const removeAbsLinks = (codeString: string): string => {
   const absolutePathRegExp = new RegExp(
-    path.resolve(".").replace(/\\/g, "/"),
+    path.resolve(".").replace(/\\/g, "\\\\"),
     "g"
   );
-  return codeString.replace(absolutePathRegExp, ".");
+  return codeString
+    .replace(absolutePathRegExp, ".")
+    .replace(new RegExp("\\\\", "g"), "/");
 };
 
 describe("plugin.transform()", () => {
