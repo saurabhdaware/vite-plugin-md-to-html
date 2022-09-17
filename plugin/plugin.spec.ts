@@ -79,7 +79,7 @@ describe("plugin.transform()", () => {
     `);
   });
 
-  test.only("should add imports based on resolveImageLinks option", () => {
+  test("should add imports based on resolveImageLinks option", () => {
     const mdSource = d`
     ## Hello
 
@@ -94,9 +94,6 @@ describe("plugin.transform()", () => {
       resolveImageLinks: true,
     });
 
-    console.log("DEBUG LOGS============");
-    console.log(path.resolve("."));
-    console.log("DEBUG LOGS END============");
     pluginWithResolves.configResolved({ build: { ssr: true } });
     expect(removeAbsLinks(pluginWithResolves.transform(mdSource, mdPath).code))
       .toMatchInlineSnapshot(`
@@ -180,6 +177,33 @@ describe("plugin.transform()", () => {
         export const html = \`<h2>Hello</h2>
         <p><img src=\\"\${mdLink0}\\" alt=\\"example\\"></p>
         \`;
+        export default html;
+        "
+      `);
+  });
+
+  test("should not add imports when image has absolute url", () => {
+    const mdSource = d`
+    ## Hello
+
+    ![example](https://hello.com/example.png)
+    ![example](./example.png)
+
+    <img alt="hello" src="https://example.com/hello.jpeg" />
+    `;
+
+    const mdPath = "./hello.md";
+
+    const plugin = vitePluginMdToHTML({
+      resolveImageLinks: false,
+    });
+
+    plugin.configResolved({ build: { ssr: true } });
+    expect(removeAbsLinks(plugin.transform(mdSource, mdPath).code))
+      .toMatchInlineSnapshot(`
+        "
+        export const attributes = {};
+        export const html = \\"<h2>Hello</h2>/n<p><img src=/\\"https://hello.com/example.png/\\" alt=/\\"example/\\">/n<img src=/\\"./example.png/\\" alt=/\\"example/\\"></p>/n<img alt=/\\"hello/\\" src=/\\"https://example.com/hello.jpeg/\\" />\\"
         export default html;
         "
       `);

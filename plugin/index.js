@@ -77,13 +77,13 @@ const vitePluginMdToHTML = (pluginOptions) => {
             html,
             id
           ));
-        }
 
-        if (isSSRBuild) {
-          clientSideImageImportScript = `<script type="module">${importDeclarations.replace(
-            /import.*?from/g,
-            "import" // Turning `import xyz from './file.svg';` statements to `import './file.svg'` statements
-          )}</script>`;
+          if (isSSRBuild) {
+            clientSideImageImportScript = `<script type="module">${importDeclarations.replace(
+              /import.*?from/g,
+              "import" // Turning `import xyz from './file.svg';` statements to `import './file.svg'` statements
+            )}</script>`;
+          }
         }
 
         const jsSrc = createJSExports({

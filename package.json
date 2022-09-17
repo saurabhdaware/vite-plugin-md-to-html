@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "vitest",
-    "test:run": "vitest run --allowOnly",
+    "test:run": "vitest run",
     "dev": "vite",
     "build:example": "vite build",
     "prepublishOnly": "npm run build:example && npm run test:run"
