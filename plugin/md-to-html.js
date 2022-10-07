@@ -1,13 +1,15 @@
-const markdownIt = require("markdown-it");
-const fm = require("front-matter");
-const markdownItHljs = require("markdown-it-highlightjs");
+import markdownIt from "markdown-it";
+import fm from "front-matter";
+import markdownItHljs from "markdown-it-highlightjs";
 
 /**
  *
  * @typedef {import('./index').PluginOptions} PluginOptions
  */
 
-let md;
+let markdown;
+/** @type {PluginOptions} */
+let pluginOptions;
 
 /** @type {PluginOptions} */
 const defaultPluginOptions = {
@@ -26,10 +28,9 @@ const defaultPluginOptions = {
  * @param {PluginOptions} userPluginOptions
  * @returns {{html: string, attributes: any}}
  */
-const markdownToHTML = (mdSource, userPluginOptions = {}) => {
+export const mdToHTML = (mdSource, userPluginOptions = {}) => {
   // In test environment, we're changing configs on every call
-  /** @type {PluginOptions} */
-  const pluginOptions = {
+  pluginOptions = {
     ...defaultPluginOptions,
     ...userPluginOptions,
     markdownIt: {
@@ -41,11 +42,11 @@ const markdownToHTML = (mdSource, userPluginOptions = {}) => {
       ...userPluginOptions.highlightJs,
     },
   };
-  if (!md || process.env.NODE_ENV === "test") {
-    md = markdownIt(pluginOptions.markdownIt);
+  if (!markdown || process.env.NODE_ENV === "test") {
+    markdown = markdownIt(pluginOptions.markdownIt);
 
     if (pluginOptions.syntaxHighlighting) {
-      md.use(markdownItHljs, {
+      markdown.use(markdownItHljs, {
         register: pluginOptions.highlightJs.register || {},
       });
     }
@@ -54,11 +55,7 @@ const markdownToHTML = (mdSource, userPluginOptions = {}) => {
   const fmObject = fm(mdSource);
 
   return {
-    html: md.render(fmObject.body),
+    html: markdown.render(fmObject.body),
     attributes: fmObject.attributes,
   };
-};
-
-module.exports = {
-  markdownToHTML,
 };

@@ -1,5 +1,5 @@
 import path from "path";
-import { vitePluginMdToHTML } from "./index";
+import { vitePluginMdToHTML } from ".";
 import { describe, expect, test } from "vitest";
 import { default as d } from "dedent";
 
