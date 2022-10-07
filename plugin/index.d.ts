@@ -12,3 +12,7 @@ export type PluginOptions =
 
 export declare function vitePluginMdToHTML(pluginOptions?: PluginOptions): any;
 export default function vitePluginMdToHTML(pluginOptions?: PluginOptions): any;
+export declare function mdToHTML(
+  mdSource: string,
+  pluginOptions?: PluginOptions
+): { html: string; attributes: any };

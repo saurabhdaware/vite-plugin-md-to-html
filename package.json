@@ -1,9 +1,10 @@
 {
   "name": "vite-plugin-md-to-html",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Vite Plugin to load markdown files as plain HTML",
   "main": "./plugin/index.js",
   "types": "./plugin/index.d.ts",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/saurabhdaware/vite-plugin-md-to-html.git"
@@ -26,12 +27,12 @@
   "author": "Saurabh Daware <saurabhdaware99@gmail.com> (https://saurabhdaware.in)",
   "license": "MIT",
   "devDependencies": {
-    "dedent": "^0.7.0",
     "highlightjs-calvera-dark": "^0.0.1",
     "vite": "^3.0.9",
     "vitest": "^0.5.5"
   },
   "dependencies": {
+    "dedent": "^0.7.0",
     "front-matter": "^4.0.2",
     "markdown-it": "^12.3.2",
     "markdown-it-highlightjs": "^3.6.0"
