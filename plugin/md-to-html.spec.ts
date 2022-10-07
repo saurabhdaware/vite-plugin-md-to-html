@@ -1,11 +1,10 @@
-import { markdownToHTML } from "./markdown-to-html";
+import { mdToHTML } from "./md-to-html";
 import { describe, expect, test } from "vitest";
 import { default as d } from "dedent";
 
 describe("markdownToHTML()", () => {
   test("should return html", () => {
-    expect(markdownToHTML(`# Hello\n\ntest **hello**`).html)
-      .toMatchInlineSnapshot(`
+    expect(mdToHTML(`# Hello\n\ntest **hello**`).html).toMatchInlineSnapshot(`
       "<h1>Hello</h1>
       <p>test <strong>hello</strong></p>
       "
@@ -21,7 +20,7 @@ describe("markdownToHTML()", () => {
     hello _there_!
     `;
 
-    const { attributes, html } = markdownToHTML(testMd);
+    const { attributes, html } = mdToHTML(testMd);
 
     expect(attributes).toEqual({
       title: "hello",
@@ -40,7 +39,7 @@ describe("markdownToHTML()", () => {
     <div>hi</div>
     `;
 
-    expect(markdownToHTML(testMd).html).toMatchInlineSnapshot(`
+    expect(mdToHTML(testMd).html).toMatchInlineSnapshot(`
       "<h1>Hello</h1>
       <div>hi</div>"
     `);
@@ -55,7 +54,7 @@ describe("markdownToHTML()", () => {
     \`\`\`
     `;
 
-    expect(markdownToHTML(testMd).html).toMatchInlineSnapshot(`
+    expect(mdToHTML(testMd).html).toMatchInlineSnapshot(`
       "<h1>Hello</h1>
       <pre><code class=\\"language-js\\">const a = 3;
       </code></pre>
@@ -71,14 +70,14 @@ describe("markdownToHTML()", () => {
 
     `;
 
-    expect(markdownToHTML(testMd).html).toMatchInlineSnapshot(`
+    expect(mdToHTML(testMd).html).toMatchInlineSnapshot(`
       "<h1>Hello</h1>
       <p><a href=\\"https://abelljs.org/\\">https://abelljs.org/</a></p>
       "
     `);
 
     expect(
-      markdownToHTML(testMd, {
+      mdToHTML(testMd, {
         markdownIt: {
           linkify: false,
         },
@@ -101,7 +100,7 @@ describe("markdownToHTML()", () => {
     `;
 
     expect(
-      markdownToHTML(testMd, {
+      mdToHTML(testMd, {
         syntaxHighlighting: true,
       }).html
     ).toMatchInlineSnapshot(`
