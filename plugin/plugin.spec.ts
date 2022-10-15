@@ -1,7 +1,8 @@
 import path from "path";
-import { vitePluginMdToHTML } from ".";
-import { describe, expect, test } from "vitest";
+import { vitePluginMdToHTML, EXPERIMENTAL_md as md } from ".";
+import { beforeEach, describe, expect, test } from "vitest";
 import { default as d } from "dedent";
+import { clearMemo } from "./vite-plugin";
 
 /**
  * Removes the absolute links from snapshot.
@@ -207,5 +208,44 @@ describe("plugin.transform()", () => {
         export default html;
         "
       `);
+  });
+});
+
+describe("EXPERIMENTAL_md()", () => {
+  beforeEach(() => {
+    clearMemo();
+  });
+
+  test("should use given plugin options", () => {
+    vitePluginMdToHTML({
+      syntaxHighlighting: true,
+    });
+    expect(md`
+      # Hello
+
+      ~~~js
+      const a = 3;
+      ~~~
+    `).toMatchInlineSnapshot(`
+      "<h1>Hello</h1>
+      <pre><code class=\\"hljs language-js\\"><span class=\\"hljs-keyword\\">const</span> a = <span class=\\"hljs-number\\">3</span>;
+      </code></pre>
+      "
+    `);
+  });
+
+  test("should do md to html", () => {
+    expect(md`
+      # Hello
+
+      ~~~js
+      const a = 3;
+      ~~~
+    `).toMatchInlineSnapshot(`
+      "<h1>Hello</h1>
+      <pre><code class=\\"language-js\\">const a = 3;
+      </code></pre>
+      "
+    `);
   });
 });

@@ -1,4 +1,4 @@
-import { mdToHTML } from "./md-to-html";
+import { mdToHTML } from ".";
 import { describe, expect, test } from "vitest";
 import { default as d } from "dedent";
 
