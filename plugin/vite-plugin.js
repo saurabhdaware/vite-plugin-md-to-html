@@ -54,6 +54,8 @@ export default html;
   return jsSrc;
 };
 
+let pluginOptionsGlobal = undefined;
+
 /**
  *
  * @param {PluginOptions} pluginOptions
@@ -61,6 +63,7 @@ export default html;
 export const vitePluginMdToHTML = (pluginOptions) => {
   /** @type {boolean} */
   let isSSRBuild = false;
+  pluginOptionsGlobal = pluginOptions;
   return {
     name: "vite-plugin-md-to-html",
     configResolved(resolvedConfig) {
@@ -96,4 +99,9 @@ export const vitePluginMdToHTML = (pluginOptions) => {
       }
     },
   };
+};
+
+export const getPluginOptionsGlobal = () => pluginOptionsGlobal;
+export const clearMemo = () => {
+  pluginOptionsGlobal = undefined;
 };

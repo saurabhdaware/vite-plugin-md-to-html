@@ -16,3 +16,4 @@ export declare function mdToHTML(
   mdSource: string,
   pluginOptions?: PluginOptions
 ): { html: string; attributes: any };
+export declare function EXPERIMENTAL_md(mdSource: TemplateStringsArray): string;

@@ -1,6 +1,8 @@
 import markdownIt from "markdown-it";
 import fm from "front-matter";
 import markdownItHljs from "markdown-it-highlightjs";
+import dedent from "dedent";
+import { getPluginOptionsGlobal } from "./vite-plugin.js";
 
 /**
  *
@@ -58,4 +60,14 @@ export const mdToHTML = (mdSource, userPluginOptions = {}) => {
     html: markdown.render(fmObject.body),
     attributes: fmObject.attributes,
   };
+};
+
+/**
+ * Currently meant to be used in static-site-generators only
+ *
+ * @param {TemplateStringsArray} mdSource
+ * @returns {string}
+ */
+export const EXPERIMENTAL_md = (mdSource) => {
+  return mdToHTML(dedent(mdSource[0]), getPluginOptionsGlobal()).html;
 };
